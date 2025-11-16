@@ -1,0 +1,45 @@
+<h1>Додати предмет</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="subject_name" placeholder="Назва предмету" required>
+    <button type="submit">Додати предмет</button>
+</form>
+
+<hr>
+
+<h1>Додати клас</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="class_name" placeholder="Назва класу" required>
+    <button type="submit">Додати клас</button>
+</form>
+
+<hr>
+
+<h1>Додати вчителя</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="teacher_name" placeholder="Ім'я вчителя" required>
+    <select name="teacher_subject" required>
+        <option value="">Оберіть предмет</option>
+        {% for subject in subjects %}
+            <option value="{{ subject.id }}">{{ subject.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Додати вчителя</button>
+</form>
+
+<hr>
+
+<h1>Додати учня</h1>
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="student_name" placeholder="Ім'я учня" required>
+    <select name="student_class" required>
+        <option value="">Оберіть клас</option>
+        {% for class in classes %}
+            <option value="{{ class.id }}">{{ class.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Додати учня</button>
+</form>
