@@ -25,3 +25,21 @@ class Student(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.class_group.name})"
+
+class Schedule(models.Model):
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+    class_group = models.ForeignKey(Class, on_delete=models.CASCADE)
+    date = models.DateField()
+    time = models.TimeField()
+
+    def __str__(self):
+        return f"{self.class_group.name} | {self.subject.name} | {self.time}"
+
+class Grade(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
+    value = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.student.name} — {self.subject.name}: {self.value}"
